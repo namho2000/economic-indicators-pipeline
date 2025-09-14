@@ -12,8 +12,15 @@ def main():
 
     # 2.각 지표 수집 -> DB 저장
     for ind in indicatorts:
-        df = fetch_data(ind["code"], start_date, end_date)
-        save_to_db(df, ind["name"])
+        # 지표에 따라 주기(cycle)를 다르게 지정
+        if ind["code"] == "731Y002":
+            # 원/달러 환율은 일별(D)로 조회
+            df = fetch_data(ind["code"], "20200101", "20231213", cycle="D")
+        else:
+            # 그외 지표는 월별(M)로 조회
+            df = fetch_data(ind["code"], start_date, end_date)
 
+        save_to_db(df, ind["name"])
+        
 if __name__ == "__main__":
     main()
