@@ -4,23 +4,26 @@ from save_to_db import save_to_db
 def main():
     # 1.지표 코드와 기간 설정 (필요하면 여기에 여러 지표 추가 가능)
     indicatorts = [
-        {"code": "722Y001", "name": "interest_rate"},   #기준금리
-        {"code": "731Y002", "name": "exchange_rate"}    #원/달러 환율 예시
+        {"code": "722Y001", "name": "interest_rate"},   # 한국은행 기준금리
+        {"code": "731Y001", "name": "exchange_rate"}    # 원/달러 환율
     ]
-    start_date = "202001"
-    end_date = "202312"
+    
+    # 분석 기간 (2000 ~ 2023)
+    start_date_month = "200001"
+    end_date_month = "202312"
+    start_date_day = "20000101"
+    end_date_day = "20231231"
+
 
     # 2.각 지표 수집 -> DB 저장
+
     for ind in indicatorts:
-        # 지표에 따라 주기(cycle)를 다르게 지정
-        if ind["code"] == "731Y002":
-            # 원/달러 환율은 일별(D)로 조회
-            df = fetch_data(ind["code"], "20200101", "20231213", cycle="D")
-        else:
-            # 그외 지표는 월별(M)로 조회
-            df = fetch_data(ind["code"], start_date, end_date)
+        if ind["code"] == "731Y001": # 환율 (일별)
+            df = fetch_data(ind["code"], start_date_day, end_date_day, cycle="D", item_filter="원/미국달러")
+        else: # 기준금리 (월별)
+            df = fetch_data(ind["code"], start_date_month, end_date_month, cycle="M")
 
         save_to_db(df, ind["name"])
-        
+
 if __name__ == "__main__":
     main()
