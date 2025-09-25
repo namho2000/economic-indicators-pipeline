@@ -16,8 +16,8 @@ API 페이징 처리, 주기(M/D) 정합, 지표 필터링, DB 적재, 재현 �
 
 ## 🗒️ 데이터 소스
 
-- **기준금리**: ECOS 코드 '722Y001' (월별, 2000.01~2023.12)
-- **환율(원/USD)**: ECOS 코드 '731Y001w' 중 **indicator = "원/미국달러(매매기준율)"**
+- **기준금리**: ECOS 코드 `722Y001` (월별, 2000.01~2023.12)
+- **환율(원/USD)**: ECOS 코드 `731Y001` 중 **indicator = "원/미국달러(매매기준율)"**
     - 일별 제공 → **월평균(M)**으로 집계, 금리와 월말 타임스탬프 기준 병합
 
 ---
@@ -67,3 +67,9 @@ DB_PATH = "../data/economic.db"
 ```bash
 python main.py
 ```
+
+5) 분석/시각화
+```bash
+python analysis.py
+```
+실행 후 저장소 루트에 `time_series.png`, `scatter_regression.png`, `lag_correlation.png`가 생성됩니다.
