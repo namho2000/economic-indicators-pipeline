@@ -23,6 +23,7 @@ API 페이징 처리, 주기(M/D) 정합, 지표 필터링, DB 적재, 재현 �
 ---
 
 ## 📁 디렉토리
+```
 ecoomic-indicators-pipeline/
 │
 ├─ src/
@@ -39,26 +40,30 @@ ecoomic-indicators-pipeline/
 ├─ scatter_regression.png
 ├─ lag_correlation.png
 └─ README.md
-
+```
 ---
 
 ## ⚙️ 실행 방법
 
 1) 저장소 클론
-'''bash
+```bash
 git clone https://github.com/namho2000/economic-indicators-pipeline.git
 cd economic-indicators-pipeline/src
+```
 
 2) 패키지 설치
-'''bash
+```bash
 pip install -r ../requirements.txt
+```
 
 3) config.py 설정
-'''python
+```python
 API_KEY = "YOUR_ECOS_API_KEY"
 BASE_URL = "https://ecos.bok.or.kr/api/StatisticSearch"
 DB_PATH = "../data/economic.db"
+```
 
 4) 데이터 수집/삭제
-'''bash
+```bash
 python main.py
+```
